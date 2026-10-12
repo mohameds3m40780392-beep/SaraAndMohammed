@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>محمد وساره — رجعنا</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:dark;
+  --ink:#150d26; --plum:#241440; --rose:#ff6f91; --gold:#ffd7a1; --mist:#eadffb; --dim:#a899c7;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box;margin:0}
+body{background:var(--ink);color:var(--mist);font-family:'Tajawal',Tahoma,sans-serif;font-weight:400;line-height:1.9;overflow-x:hidden}
+h1,h2,.script{font-family:'Aref Ruqaa','Amiri',serif;font-weight:700}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* hero */
+.hero{position:relative;min-height:100svh;display:grid;grid-template-rows:1fr auto;background:radial-gradient(120% 80% at 50% 0%,var(--plum),var(--ink) 70%)}
+#stage{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero-text{position:relative;z-index:1;text-align:center;padding:14vh 1.5rem 0;pointer-events:none}
+.hero-text h1{font-size:clamp(2.6rem,9vw,5.5rem);line-height:1.3;transition:opacity .6s,transform .6s}
+.hero-text p{color:var(--dim);font-size:clamp(1rem,2.6vw,1.25rem);max-width:30ch;margin:.5rem auto 0;transition:opacity .6s}
+.swap{opacity:0;transform:translateY(8px)}
+.controls{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:.6rem;padding:0 1rem 9vh}
+.btn{font:inherit;font-weight:500;font-size:1.15rem;color:var(--ink);background:linear-gradient(135deg,var(--gold),var(--rose));border:0;border-radius:999px;padding:.8rem 2.4rem;cursor:pointer;box-shadow:0 0 0 0 rgba(255,111,145,.5);transition:transform .2s,box-shadow .3s}
+.btn:hover{transform:scale(1.04);box-shadow:0 0 36px 4px rgba(255,111,145,.35)}
+.btn:active{transform:scale(.97)}
+.link{font:inherit;background:none;border:0;color:var(--dim);cursor:pointer;text-decoration:underline;text-underline-offset:4px;font-size:.95rem}
+
+/* sections */
+section.s{max-width:760px;margin:0 auto;padding:6rem 1.5rem}
+h2{font-size:clamp(2rem,6vw,3rem);line-height:1.4;margin-bottom:2.5rem}
+
+/* timeline */
+.tl{position:relative;padding-inline-start:2.2rem;border-inline-start:2px solid transparent;border-image:linear-gradient(var(--dim),var(--rose),var(--gold)) 1}
+.tl li{list-style:none;position:relative;margin-bottom:2.6rem;opacity:.25;transform:translateX(-14px);transition:opacity .7s,transform .7s}
+.tl li.on{opacity:1;transform:none}
+.tl li::before{content:"";position:absolute;inset-inline-start:calc(-2.2rem - 7px);top:.7rem;width:12px;height:12px;border-radius:50%;background:var(--dim);transition:background .6s,box-shadow .6s}
+.tl li.on::before{background:var(--rose);box-shadow:0 0 14px var(--rose)}
+.tl li:last-child.on::before{background:var(--gold);box-shadow:0 0 22px var(--gold)}
+.tl h3{font-family:'Aref Ruqaa',serif;font-size:1.6rem;color:var(--gold)}
+.tl p{color:var(--dim);max-width:44ch}
+
+/* counter */
+.count{background:linear-gradient(160deg,var(--plum),#1b1030);border-radius:28px;padding:3rem 1.5rem;text-align:center;border:1px solid rgba(255,215,161,.18)}
+.units{display:flex;justify-content:center;gap:clamp(.8rem,4vw,2.4rem);flex-wrap:wrap;margin:1.5rem 0}
+.u b{display:block;font-family:'Aref Ruqaa',serif;font-size:clamp(2.4rem,9vw,4rem);line-height:1.2;color:var(--gold);font-variant-numeric:tabular-nums}
+.u span{color:var(--dim);font-size:.95rem}
+.count label{color:var(--dim);font-size:.95rem}
+.count input{font:inherit;color:var(--mist);background:var(--ink);border:1px solid var(--dim);border-radius:10px;padding:.35rem .7rem;margin-inline-start:.5rem;color-scheme:dark}
+
+/* letter */
+.letter{background:rgba(234,223,251,.06);border:1px solid rgba(234,223,251,.14);border-radius:24px;padding:2rem 1.6rem;min-height:14rem}
+.letter pre{font-family:inherit;white-space:pre-wrap;font-size:1.15rem;line-height:2.1;min-height:11rem}
+.letter .btn{margin-top:1rem}
+.caret::after{content:"";display:inline-block;width:2px;height:1.1em;background:var(--rose);vertical-align:middle;margin-inline-start:3px;animation:bl 1s steps(1) infinite}
+@keyframes bl{50%{opacity:0}}
+
+footer{text-align:center;padding:4rem 1rem 6rem;color:var(--dim)}
+footer .script{font-size:2rem;color:var(--mist)}
+#hearts{position:fixed;inset:0;pointer-events:none;z-index:5}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important;animation:none!important}
+  .tl li{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <canvas id="stage" role="img" aria-label="نقطتان مضيئتان تقتربان من بعض حتى تتحدا"></canvas>
+  <div class="hero-text" aria-live="polite">
+    <h1 id="title">كل واحد فينا في سكة</h1>
+    <p id="sub">بس القلب كان لسه بيدوّر على التاني.</p>
+  </div>
+  <div class="controls">
+    <button class="btn" id="go" type="button">قرّبهم من بعض</button>
+    <button class="link" id="reset" type="button" hidden>شغّل المشهد تاني</button>
+  </div>
+</header>
+
+<section class="s" id="story">
+  <h2>الحكاية من أولها</h2>
+  <ol class="tl">
+    <li><h3>كنا قريبين</h3><p>كل حاجة بسيطة كانت بتبقى أحلى لما تكوني فيها.</p></li>
+    <li><h3>بعدنا</h3><p>سكتنا في مكان كان لازم نتكلم فيه، والمسافة كبرت من غير ما نحس.</p></li>
+    <li><h3>فهمنا</h3><p>في البُعد اتعلمنا إن الحب مش بس إحساس، ده كمان صبر وكلمة طيبة وإننا نسمع.</p></li>
+    <li><h3>رجعنا</h3><p>رجعنا أهدى وأنضج وأقرب، وإيدينا في إيد بعض باختيار مش بعادة.</p></li>
+  </ol>
+</section>
+
+<section class="s" id="time">
+  <h2>بقالنا قد إيه مع بعض تاني</h2>
+  <div class="count">
+    <label>تاريخ رجوعنا <input type="datetime-local" id="since"></label>
+    <div class="units" aria-live="off">
+      <div class="u"><b id="d">0</b><span>يوم</span></div>
+      <div class="u"><b id="h">0</b><span>ساعة</span></div>
+      <div class="u"><b id="m">0</b><span>دقيقة</span></div>
+      <div class="u"><b id="s">0</b><span>ثانية</span></div>
+    </div>
+    <p class="script" style="font-size:1.5rem;color:var(--gold)">وكل ثانية معاكي ليها معنى</p>
+  </div>
+</section>
+
+<section class="s" id="letter">
+  <h2>رسالة صغيرة</h2>
+  <div class="letter">
+    <pre id="msg" aria-live="polite"></pre>
+    <button class="btn" id="open" type="button">افتحي الرسالة يا ساره</button>
+  </div>
+</section>
+
+<footer>
+  <div class="script">محمد وساره</div>
+  <p>رجعنا… وإن شاء الله المرة دي للأبد.</p>
+</footer>
+
+<canvas id="hearts" aria-hidden="true"></canvas>
+
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- المشهد الرئيسي ---------- */
+const cv=$('stage'),cx=cv.getContext('2d');
+let W,H,DPR,p=0,target=0,merged=false,parts=[],t0=performance.now();
+function size(){DPR=Math.min(devicePixelRatio||1,2);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*DPR;cv.height=H*DPR;cx.setTransform(DPR,0,0,DPR,0,0)}
+addEventListener('resize',size);size();
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+function orb(x,y,r,c1,c2){
+  const g=cx.createRadialGradient(x,y,0,x,y,r);
+  g.addColorStop(0,c1);g.addColorStop(.35,c2);g.addColorStop(1,'rgba(255,111,145,0)');
+  cx.fillStyle=g;cx.beginPath();cx.arc(x,y,r,0,7);cx.fill();
+}
+function burst(x,y){
+  const n=reduce?0:140;
+  for(let i=0;i<n;i++){const a=Math.random()*6.283,s=1+Math.random()*4.5;
+    parts.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,l:1,c:Math.random()<.5?'255,215,161':'255,111,145'})}
+}
+function frame(now){
+  const t=(now-t0)/1000;
+  cx.clearRect(0,0,W,H);
+  p+=(target-p)*(reduce?1:.018);
+  if(Math.abs(target-p)<.002)p=target;
+  const e=ease(p),mx=W/2,my=H*.46,span=Math.min(W*.36,300);
+  const fl=(1-e)*Math.sin(t*1.3)*14;
+  let ax,ay,bx,by;
+  if(merged){
+    const ang=t*1.1,r=22+Math.sin(t*2)*4;
+    ax=mx+Math.cos(ang)*r;ay=my+Math.sin(ang)*r;bx=mx-Math.cos(ang)*r;by=my-Math.sin(ang)*r;
+  }else{
+    ax=mx+span*(1-e);ay=my+fl; /* في الـRTL محمد على اليمين */
+    bx=mx-span*(1-e);by=my-fl;
+  }
+  /* الخيط بينهم */
+  const mid=(ay+by)/2+(1-e)*Math.sin(t*2)*30;
+  cx.lineWidth=1+e*3;
+  const lg=cx.createLinearGradient(ax,0,bx,0);
+  lg.addColorStop(0,'rgba(255,215,161,.7)');lg.addColorStop(1,'rgba(255,111,145,.7)');
+  cx.strokeStyle=lg;cx.globalAlpha=.25+e*.6;
+  cx.beginPath();cx.moveTo(ax,ay);cx.quadraticCurveTo(mx,mid,bx,by);cx.stroke();cx.globalAlpha=1;
+  cx.globalCompositeOperation='lighter';
+  const pulse=merged?1+Math.sin(t*4)*.08:1;
+  orb(ax,ay,(70+e*50)*pulse,'rgba(255,240,215,.95)','rgba(255,215,161,.35)');
+  orb(bx,by,(70+e*50)*pulse,'rgba(255,225,235,.95)','rgba(255,111,145,.35)');
+  if(merged)orb(mx,my,160+Math.sin(t*4)*14,'rgba(255,160,150,.25)','rgba(255,111,145,.08)');
+  for(let i=parts.length-1;i>=0;i--){const q=parts[i];
+    q.x+=q.vx;q.y+=q.vy;q.vx*=.985;q.vy*=.985;q.l-=.008;
+    if(q.l<=0){parts.splice(i,1);continue}
+    cx.fillStyle='rgba('+q.c+','+q.l+')';cx.beginPath();cx.arc(q.x,q.y,2.2*q.l+.5,0,7);cx.fill()}
+  cx.globalCompositeOperation='source-over';
+  /* الأسماء */
+  cx.font='700 22px "Aref Ruqaa",serif';cx.textAlign='center';cx.fillStyle='rgba(234,223,251,'+(.9-e*.5)+')';
+  if(!merged){cx.fillText('محمد',ax,ay+Math.max(70,100));cx.fillText('ساره',bx,by+Math.max(70,100))}
+  if(!merged&&p>.985){merged=true;burst(mx,my);words(true);hearts(26)}
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+function words(done){
+  const T=$('title'),S=$('sub');
+  T.classList.add('swap');S.classList.add('swap');
+  setTimeout(()=>{
+    T.textContent=done?'رجعنا يا ساره':'كل واحد فينا في سكة';
+    S.textContent=done?'ومحمد مش هيسيب إيدك تاني.':'بس القلب كان لسه بيدوّر على التاني.';
+    T.classList.remove('swap');S.classList.remove('swap');
+  },reduce?0:450);
+  $('go').hidden=done;$('reset').hidden=!done;
+}
+$('go').onclick=()=>{target=1};
+$('reset').onclick=()=>{merged=false;p=0;target=0;parts=[];words(false)};
+
+/* ---------- قلوب تطلع ---------- */
+const hc=$('hearts'),hx=hc.getContext('2d');let hs=[],hr=false;
+function hsize(){hc.width=innerWidth;hc.height=innerHeight}addEventListener('resize',hsize);hsize();
+function hearts(n){
+  if(reduce)return;
+  for(let i=0;i<n;i++)hs.push({x:Math.random()*hc.width,y:hc.height+20+Math.random()*200,s:10+Math.random()*16,v:.8+Math.random()*1.8,w:Math.random()*6,a:.9});
+  if(!hr){hr=true;requestAnimationFrame(hloop)}
+}
+function hloop(){
+  hx.clearRect(0,0,hc.width,hc.height);
+  hs=hs.filter(h=>h.y>-40);
+  for(const h of hs){
+    h.y-=h.v;h.w+=.03;const x=h.x+Math.sin(h.w)*18;
+    hx.save();hx.translate(x,h.y);hx.scale(h.s/16,h.s/16);
+    hx.globalAlpha=Math.max(0,Math.min(1,h.y/(hc.height*.5)))*.85;
+    hx.fillStyle='#ff6f91';hx.beginPath();
+    hx.moveTo(0,5);hx.bezierCurveTo(-16,-6,-8,-18,0,-8);hx.bezierCurveTo(8,-18,16,-6,0,5);hx.fill();hx.restore();
+  }
+  if(hs.length)requestAnimationFrame(hloop);else hr=false;
+}
+
+/* ---------- الخط الزمني ---------- */
+const items=[...document.querySelectorAll('.tl li')];
+const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('on');io.unobserve(en.target)}}),{threshold:.6});
+items.forEach(i=>io.observe(i));
+
+/* ---------- العداد ---------- */
+const inp=$('since');
+const pad=n=>String(n).padStart(2,'0');
+const toLocal=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())+'T'+pad(d.getHours())+':'+pad(d.getMinutes());
+let since=new Date(2026,9,11,11,30);
+try{const s=localStorage.getItem('ms-since');if(s){const d=new Date(s);if(!isNaN(d))since=d}}catch(e){}
+inp.value=toLocal(since);
+inp.onchange=()=>{const d=new Date(inp.value);if(!isNaN(d)){since=d;try{localStorage.setItem('ms-since',d.toISOString())}catch(e){}}};
+const ar=n=>n.toLocaleString('ar-EG');
+function tick(){
+  let s=Math.max(0,Math.floor((Date.now()-since)/1000));
+  $('d').textContent=ar(Math.floor(s/86400));
+  $('h').textContent=ar(Math.floor(s%86400/3600));
+  $('m').textContent=ar(Math.floor(s%3600/60));
+  $('s').textContent=ar(s%60);
+}
+tick();setInterval(tick,1000);
+
+/* ---------- الرسالة ---------- */
+const text=`ساره،
+
+مش هقول إني ما غلطتش، أنا غلطت. بس اتعلمت.
+
+اتعلمت إن الكلمة الحلوة بتفرق، وإن السكوت بيكسر أكتر من الزعل، وإن اللي بنحبه لازم نختاره كل يوم من جديد.
+
+رجوعك ليا مش حاجة عادية، دي هدية. وأنا وعد مني أحافظ عليها، وأسمعك، وأكون سند ليكي زي ما كنتي سند ليا.
+
+بحبك،
+محمد`;
+let typing=false;
+$('open').onclick=function(){
+  if(typing)return;typing=true;this.hidden=true;
+  const el=$('msg');el.classList.add('caret');
+  if(reduce){el.textContent=text;el.classList.remove('caret');return}
+  let i=0;(function step(){
+    el.textContent=text.slice(0,++i);
+    if(i<text.length)setTimeout(step,text[i-1]==='\n'?260:38);
+    else{el.classList.remove('caret');hearts(30)}
+  })();
+};
+})();
+</script>
+</body>
+</html>
